@@ -1,0 +1,27 @@
+/* Common CSS for Navbar and Background Image */
+body{
+    background-image: url("../Resources/bg.png");
+    background-repeat: no-repeat;
+    background-size: 50%;
+    background-position: bottom;
+    
+    
+}
+.navbar{
+    background-color: #04589C;
+    padding: 20px;
+    -webkit-box-shadow: 0 8px 6px -6px #999;
+    -moz-box-shadow: 0 8px 6px -6px #999;
+    box-shadow: 0 8px 6px -6px #999;
+}
+.nav-image{
+    max-height: 70px;
+}
+/* Orange Line */
+hr{
+    background-color: orange;
+    border-width: 3px;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
