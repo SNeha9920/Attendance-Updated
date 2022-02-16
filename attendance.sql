@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 16, 2022 at 05:56 AM
+-- Generation Time: Feb 16, 2022 at 07:03 AM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.9
 
@@ -187,7 +187,7 @@ INSERT INTO `subject` (`subject_id`, `name`, `year`, `semester`) VALUES
 
 CREATE TABLE `term_work` (
   `student_id` varchar(50) NOT NULL,
-  `subject_id` bigint(20) NOT NULL,
+  `subject_id` varchar(20) NOT NULL,
   `attendancemarks` int(11) NOT NULL,
   `assignment` int(11) DEFAULT NULL,
   `presentation` int(11) DEFAULT NULL,
@@ -226,27 +226,33 @@ INSERT INTO `user` (`teacher_id`, `first_name`, `middle_name`, `last_name`, `gen
 -- Indexes for table `attendance`
 --
 ALTER TABLE `attendance`
-  ADD UNIQUE KEY `student_id_2` (`student_id`,`subject_id`),
-  ADD KEY `Foreign Key 2` (`subject_id`);
+  ADD UNIQUE KEY `attendance_stu_sub_unique` (`student_id`,`subject_id`);
 
 --
 -- Indexes for table `position`
 --
 ALTER TABLE `position`
-  ADD KEY `subject_id` (`subject_id`),
-  ADD KEY `teacher_id` (`teacher_id`);
+  ADD UNIQUE KEY `position_unique` (`teacher_id`,`subject_id`,`incharge`,`academic_year`,`scheme`,`year`,`semester`,`division`,`batch`),
+  ADD KEY `position_subject_id` (`subject_id`);
 
 --
 -- Indexes for table `student`
 --
 ALTER TABLE `student`
-  ADD UNIQUE KEY `student_id` (`student_id`);
+  ADD PRIMARY KEY (`student_id`);
 
 --
 -- Indexes for table `subject`
 --
 ALTER TABLE `subject`
   ADD PRIMARY KEY (`subject_id`);
+
+--
+-- Indexes for table `term_work`
+--
+ALTER TABLE `term_work`
+  ADD UNIQUE KEY `position_stu_sub_unique` (`student_id`,`subject_id`),
+  ADD KEY `term_work_subject_id` (`subject_id`);
 
 --
 -- Indexes for table `user`
@@ -273,15 +279,22 @@ ALTER TABLE `user`
 -- Constraints for table `attendance`
 --
 ALTER TABLE `attendance`
-  ADD CONSTRAINT `Foreign Key 1` FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`),
-  ADD CONSTRAINT `Foreign Key 2` FOREIGN KEY (`subject_id`) REFERENCES `subject` (`subject_id`);
+  ADD CONSTRAINT `attendance_student_id` FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`),
+  ADD CONSTRAINT `attendance_subject_id` FOREIGN KEY (`subject_id`) REFERENCES `subject` (`subject_id`);
 
 --
 -- Constraints for table `position`
 --
 ALTER TABLE `position`
-  ADD CONSTRAINT `Foreign Key 3` FOREIGN KEY (`teacher_id`) REFERENCES `user` (`teacher_id`),
-  ADD CONSTRAINT `Foreign Key 4` FOREIGN KEY (`subject_id`) REFERENCES `subject` (`subject_id`);
+  ADD CONSTRAINT `position_subject_id` FOREIGN KEY (`subject_id`) REFERENCES `subject` (`subject_id`),
+  ADD CONSTRAINT `position_teacher_id` FOREIGN KEY (`teacher_id`) REFERENCES `user` (`teacher_id`);
+
+--
+-- Constraints for table `term_work`
+--
+ALTER TABLE `term_work`
+  ADD CONSTRAINT `term_work_student_id` FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`),
+  ADD CONSTRAINT `term_work_subject_id` FOREIGN KEY (`subject_id`) REFERENCES `subject` (`subject_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
