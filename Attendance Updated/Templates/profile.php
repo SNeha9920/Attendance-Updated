@@ -185,7 +185,7 @@ if (!isset($_SESSION['userlogin'])) {
                     </div>
                   </div>
                 </div>
-                <button type="submit" name="edit" id="edit" class="btn btn-primary" style="margin-top:20px" value="edit">Edit</button>
+                <button type="submit" name="edit" id="edit" class="btn btn-primary" style="margin-top:20px" value="edit">Update</button>
       <input type="hidden" value="<?php echo (array_values($_SESSION['userlogin']))['0'] ?>" name="id">
                 <hr class="my-4">
             </div>
@@ -238,4 +238,3 @@ if (!isset($_SESSION['userlogin'])) {
 </body>
 
 </html>
-

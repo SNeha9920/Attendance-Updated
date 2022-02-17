@@ -1,8 +1,8 @@
 <?php
 session_start();
-if (!isset($_SESSION['userlogin']) && (array_values($_SESSION['userlogin']))['5']!='hodcomp@dmce.ac.in') {
+if (!isset($_SESSION['userlogin']) && (array_values($_SESSION['userlogin']))['5']!='manoj.patil@dmce.ac.in') {
   header("location: login.php");
-  // hodcomp@dmce.ac.in
+  // manoj.patil@dmce.ac.in
 }
 require '../views.php';
 require_once('../config.php');
@@ -461,6 +461,7 @@ list($all_user_result, $theory_subject_result, $practical_subject_result, $assig
       <th>Semester</th>
       <th>Division</th>
       <th>Batch</th>
+      <th>Approval Status</th>
     </tr>
     <?php
         while($row = mysqli_fetch_array($assigned_faculties_result)){
@@ -471,10 +472,26 @@ list($all_user_result, $theory_subject_result, $practical_subject_result, $assig
             <td><?php echo $row['name']; ?></td>
             <td><?php echo $row['academic_year']; ?></td>
             <td><?php echo $row['scheme']; ?></td>
-            <td><input style="border: none; color: black; width: 30px" type="text" disabled  value="<?php echo $row['year']; ?>"></td>
-            <td><?php echo  $row['semester']; ?></td>
+            <td><input style="border: none; color: black; width: 30px" type="text" disabled  value="<?php echo $row['position_year']; ?>"></td>
+            <td><?php echo  $row['position_semester']; ?></td>
             <td><?php echo  $row['division']; ?></td>
             <td><input style="border: none; color: black; width: 30px" type="text" disabled  value="<?php echo $row['batch']; ?>"></td>
+            <?php
+            if ($row['approval_status']=='2') {
+              $status = 'SENT FOR APPROVAL';
+            } 
+            elseif ($row['approval_status']=='0') {
+              $status = 'REJECTED';
+            }
+            elseif ($row['approval_status']=='1') {
+              $status = 'APPROVED';
+            }
+            else {
+              $status = 'NA';
+            }
+            
+            ?>
+            <td><?php echo  $status; ?></td>
 
 
 
@@ -484,6 +501,26 @@ list($all_user_result, $theory_subject_result, $practical_subject_result, $assig
         ?>
       </table>
     </div>
+
+
+<form method="POST" action="../urls.php">
+    <div class="container">
+          <div class="form-group" style="width: 100%; margin-top: 30px; float: left">
+            <button
+              type="submit"
+              value="submit"
+              id="send"
+              name="send"
+              class="btn btn-success"
+            >
+              Send For Approval
+            </button>
+          </div>
+        </div>
+
+        <input type="hidden" name="faculty_list" value="<?php print_r($assigned_faculties_result); ?>">
+</form>
+
     <script>
       document.getElementById('downloadExcel').addEventListener('click', function() {
         var table2excel = new Table2Excel();

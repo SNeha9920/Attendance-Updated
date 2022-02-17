@@ -159,7 +159,7 @@ if (isset($_SESSION['userlogin'])) {
 <!-- Card Container -->
     <div class="card-deck text-center d-flex justify-content-center" id="card-deck">
     <?php
-if (isset($_SESSION['userlogin']) && (array_values($_SESSION['userlogin']))['5']=='hodcomp@dmce.ac.in') {
+if (isset($_SESSION['userlogin']) && (array_values($_SESSION['userlogin']))['5']=='manoj.patil@dmce.ac.in') {
   ?>
           <!-- Faculty Selection -->
           <a href="faculty.php">
@@ -178,6 +178,29 @@ if (isset($_SESSION['userlogin']) && (array_values($_SESSION['userlogin']))['5']
           <?php
         }
         ?>
+
+
+        <?php
+if (isset($_SESSION['userlogin']) && (array_values($_SESSION['userlogin']))['5']=='hodcomp@dmce.ac.in') {
+  ?>
+          <!-- Faculty Approval -->
+          <a href="faculty_approve.php">
+            <div class="card" id="card1">
+              <div class="card-body">
+                
+                <svg width="140" height="140" viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M17.5 26.25V35H113.75V105H52.5V113.75H131.25V105H122.5V26.25H17.5ZM35.0087 39.375C30.3716 39.3911 25.9289 41.2398 22.6491 44.5179C19.3693 47.7961 17.5184 52.2379 17.5 56.875C17.5 66.4956 25.3925 74.375 35.0087 74.375C39.6436 74.3566 44.0831 72.5066 47.3596 69.2285C50.6361 65.9503 52.4839 61.5098 52.5 56.875C52.5 47.2631 44.6162 39.375 35.0087 39.375ZM61.25 43.75V52.5H83.125V43.75H61.25ZM91.875 43.75V52.5H105V43.75H91.875ZM35.0087 48.125C39.8825 48.125 43.75 51.9881 43.75 56.875C43.75 61.775 39.8869 65.625 35.0087 65.625C30.1087 65.625 26.25 61.775 26.25 56.875C26.25 51.9881 30.1131 48.125 35.0087 48.125V48.125ZM61.25 61.25V70H105V61.25H61.25ZM17.5 78.75V113.75H26.25V87.5H39.375V113.75H48.125V90.3788L57.155 95.1562C59.7144 96.5125 62.79 96.5081 65.345 95.1562V95.165L80.7887 86.9969L76.7069 79.2531L61.2587 87.4213L47.7138 80.2725C45.8234 79.2738 43.718 78.7512 41.58 78.75H17.5Z" fill="black"/>
+</svg>
+  
+                <h5 class="card-title">Faculty Approval</h5>
+              </div>
+            </div>
+          </a>
+          <!-- Faculty Approval -->
+          <?php
+        }
+        ?>
+
   
           <!-- Roll List -->
           <a href="roll_list_class_incharge.php">

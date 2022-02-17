@@ -12,16 +12,48 @@ function FacultyData($connect){
   $practical_subject = "SELECT * FROM subject";  
   $practical_subject_result = mysqli_query($connect, $practical_subject);
 
-  $assigned_faculties = "SELECT position.*, subject.*, user.* FROM position LEFT JOIN user ON position.teacher_id= user.teacher_id LEFT JOIN subject ON position.subject_id = subject.subject_id";  
+  $assigned_faculties = "SELECT position.*, subject.*, user.*, position.year AS position_year, position.semester AS position_semester FROM position LEFT JOIN user ON position.teacher_id= user.teacher_id LEFT JOIN subject ON position.subject_id = subject.subject_id";  
   $assigned_faculties_result = mysqli_query($connect, $assigned_faculties);
 
-  return array($all_user_result, $theory_subject_result, $practical_subject_result, $assigned_faculties_result);
+  $approved_faculties = "SELECT position.*, subject.*, user.*, position.year AS position_year, position.semester AS position_semester FROM position LEFT JOIN user ON position.teacher_id= user.teacher_id LEFT JOIN subject ON position.subject_id = subject.subject_id WHERE position.approval_status='2'";  
+  $approved_faculties_result = mysqli_query($connect, $approved_faculties);
+
+  return array($all_user_result, $theory_subject_result, $practical_subject_result, $assigned_faculties_result, $approved_faculties_result);
 }
 
 function AddFaculty($connect, $faculty,$incharge, $academic_year, $scheme,$year,$semester, $division, $batch, $subject) {
     $add_faculty = "INSERT INTO position (teacher_id, subject_id, incharge, academic_year, scheme, year, semester, division, batch) VALUES ('$faculty','$subject', '$incharge','$academic_year','$scheme','$year','$semester', '$division', '$batch')"; 
   $add_faculty_result = mysqli_query($connect, $add_faculty);
   print_r($connect);
+    }
+
+
+function SendFaculty($connect, $faculty_list) {
+  while($row = mysqli_fetch_array($faculty_list)){
+    $id = $row['id'];
+    $send_faculty = "UPDATE position SET approval_status='2' WHERE id = '$id'"; 
+  $send_faculty_result = mysqli_query($connect, $send_faculty);
+  print_r($connect);
+}
+    }
+
+
+function ApproveFaculty($connect, $faculty_list) {
+  while($row = mysqli_fetch_array($faculty_list)){
+    $id = $row['id'];
+    $approve_faculty = "UPDATE position SET approval_status='1' WHERE id = '$id'"; 
+    $approve_faculty_result = mysqli_query($connect, $approve_faculty);
+    print_r($connect);
+}
+    }
+
+function RejectFaculty($connect, $faculty_list) {
+  while($row = mysqli_fetch_array($faculty_list)){
+    $id = $row['id'];
+    $reject_faculty = "UPDATE position SET approval_status='0' WHERE id = '$id'"; 
+  $reject_faculty_result = mysqli_query($connect, $reject_faculty);
+  print_r($connect);
+}
     }
 
 
@@ -91,10 +123,9 @@ function CreateAttendance($connect, $student_id, $subject, $month, $lectures_tak
     }
 }
 
-views.php
+
 function ProfileDetails($connect, $first_name, $middle_name, $last_name, $email, $gender, $id){
   $profile_details = "UPDATE user SET first_name='$first_name', middle_name = '$middle_name',last_name = '$last_name',gender = '$gender', email = '$email'  WHERE teacher_id = '$id'";
   $profile_details_result = mysqli_query($connect, $profile_details);
 }
-
 ?>

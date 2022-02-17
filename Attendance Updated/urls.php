@@ -9,6 +9,27 @@ if (isset($_POST['submit'])){
 	
 }
 
+if (isset($_POST['send'])){
+	SendFaculty($connect, $_POST['faculty_list']);
+	// header("location: Templates/faculty.php");
+	
+}
+
+// faculty_approve.php
+if (isset($_POST['reject_faculty'])){
+	RejectFaculty($connect, $_POST['faculty_list']);
+	// header("location: Templates/faculty_approve.php");
+	
+}
+
+
+if (isset($_POST['approve_faculty'])){
+	ApproveFaculty($connect, $_POST['faculty_list']);
+	// header("location: Templates/faculty_approve.php");
+	
+}
+
+
 // roll_list_class_incharge.php
 if(isset($_POST['display'])){
 	list($display_rolllist_result, $year, $semester, $div) = DisplayStudentRollList($connect, $_POST['year'], $_POST['semester'], $_POST['division']);
@@ -54,7 +75,6 @@ if (isset($_POST['create'])) {
 if (isset($_POST['create_attendance'])) {
 	CreateAttendance($connect, $_POST['student_id'], $_POST['subject'], $_POST['month'], $_POST['lectures_taken'], $_POST['days']);
 }
-
 
 if(isset($_POST['edit'])){
 echo $_POST['first_name'];
