@@ -15,9 +15,9 @@ if (!isset($_SESSION['userlogin'])) {
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
   <!-- <link rel="stylesheet" href="/style.css"> -->
-  <link rel="stylesheet" href="profile.css">
+  <link rel="stylesheet" href="../CSS/profile.css">
   <title>DMCE . Amendment Portal</title>
-  <link rel="icon" href="resources/dmce_logo.jpeg" type="image/x-icon">
+  <link rel="icon" href="../Resources/dmce_logo.jpeg" type="image/x-icon">
 </head>
 
 <body>
@@ -28,7 +28,7 @@ if (!isset($_SESSION['userlogin'])) {
   <!-- Navbar -->
   <nav class="anavbar"></nav>
   <div>
-    <img src="resources/logo_blue.png" class="nav-image img-fluid" alt="DMCE" />
+    <img src="../Resources/logo_blue.png" class="nav-image img-fluid" alt="DMCE" />
   </div>
   <hr class="ahr" />
   <!-- Navbar -->
@@ -53,9 +53,9 @@ if (!isset($_SESSION['userlogin'])) {
                 <span class="avatar avatar-sm rounded-circle">
                   <?php
                   if ((array_values($_SESSION['userlogin']))['4'] == 'male') {
-                    echo '<img src="resources/mProfile.png" class="rounded-circle"style="height:40px; width:40px">';
+                    echo '<img src="../Resources/mProfile.png" class="rounded-circle"style="height:40px; width:40px">';
                   } else {
-                    echo '<img src="resources/fProfile.png" class="rounded-circle"style="height:40px; width:40px">';
+                    echo '<img src="../Resources/fProfile.png" class="rounded-circle"style="height:40px; width:40px">';
                   }
                   ?>
 
@@ -75,7 +75,7 @@ if (!isset($_SESSION['userlogin'])) {
       </div>
     </nav>
     <!-- Header -->
-    <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 600px; background-image: url(\'resources/bldg.png\'); background-size: cover; background-position: center top;">
+    <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 600px; background-image: url('../Resources/bldg.png'); background-size: cover; background-position: center top;">
       <!-- Mask -->
       <span class="mask bg-gradient-default opacity-8"></span>
       <!-- Header container -->
@@ -100,9 +100,9 @@ if (!isset($_SESSION['userlogin'])) {
                     <?php
 
                     if ((array_values($_SESSION['userlogin']))['4'] == 'male') {
-                      echo '<img src="resources/mProfile.png" class="rounded-circle"style="height:200px; width:200px">';
+                      echo '<img src="../Resources/mProfile.png" class="rounded-circle"style="height:200px; width:200px">';
                     } else {
-                      echo '<img src="resources/fProfile.png" class="rounded-circle"style="height:200px; width:200px">';
+                      echo '<img src="../Resources/fProfile.png" class="rounded-circle"style="height:200px; width:200px">';
                     }
                     ?>
 
@@ -147,7 +147,7 @@ if (!isset($_SESSION['userlogin'])) {
             </div>
             <div class="card-body">
 
-              <form method="POST" action="#">
+              <form method="POST" action="../urls.php">
                 <h6 class="heading-small text-muted mb-4">User information</h6>
                 <div class="pl-lg-4">
                   <div class="row">
@@ -185,8 +185,8 @@ if (!isset($_SESSION['userlogin'])) {
                     </div>
                   </div>
                 </div>
-                <!-- <button type="submit" name="submit" class="btn btn-primary" style="margin-top:20px" value="upload">Upload</button>
-      <input type="hidden" value="<?php echo (array_values($_SESSION['userlogin']))['0'] ?>" name="id"> -->
+                <button type="submit" name="edit" id="edit" class="btn btn-primary" style="margin-top:20px" value="edit">Edit</button>
+      <input type="hidden" value="<?php echo (array_values($_SESSION['userlogin']))['0'] ?>" name="id">
                 <hr class="my-4">
             </div>
           </div>
@@ -239,19 +239,3 @@ if (!isset($_SESSION['userlogin'])) {
 
 </html>
 
-<?php
-$connect = mysqli_connect("localhost", "root", "", "attendance");
-
-
-if (isset($_POST["submit"])) {
-  $first_name = $_POST['first_name'];
-  $middle_name = $_POST['middle_name'];
-  $last_name = $_POST['last_name'];
-  $email = $_POST['email'];
-  $gender = $_POST['gender'];
-  $id = $_POST['id'];
-  $query = "UPDATE user SET first_name='$first_name', middle_name = '$middle_name',last_name = '$last_name',email = '$email', gender = '$gender' WHERE id = '$id'";
-  if (mysqli_query($connect, $query)) {
-  }
-}
-?>
