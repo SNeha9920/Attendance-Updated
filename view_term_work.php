@@ -219,6 +219,10 @@
     
     require_once('../config.php');
         $query = "SELECT attendance.*, student.*, subject.*, position.* , student.name as student_name FROM attendance RIGHT JOIN student ON attendance.student_id= student.student_id LEFT JOIN subject ON attendance.subject_id = subject.subject_id LEFT JOIN position ON attendance.subject_id = position.subject_id WHERE student.year='$year' AND student.semester='$semester' AND student.division='$division' AND subject.subject_id='$subject' AND position.subject_id='$subject'";  
+
+        $insert = "SELECT term_work.* FROM term_work WHERE subject_id='$subject' ";
+        $tmwk = mysqli_query($connect, $insert);
+
         $result = mysqli_query($connect, $query);
         while($row = mysqli_fetch_array($result)){
           $arr = json_decode($row['attendance'],true);
@@ -310,7 +314,7 @@
             
             </script>
       </td>
-      <td><input type="number"  required name="presentationexp" id="presentationexp" oninput="addit()" maxlength="1" min="0" max="5" size="1"></td>
+      <td><input type="number"  required name="presentationexp" id="presentationexp" oninput="addit()" maxlength="1" min="0" max="5" size="1" value="4"></td>
       <td><input type="number" required name="gradeexp" id="gradeexp" oninput="addit()" maxlength="1" min="0" max="5" size="1"></td>
       <td><input type="number" required name="overallexp" id="overallexp" oninput="addit()" maxlength="1" min="0" max="5" size="1"></td>
           
@@ -386,6 +390,8 @@
             <script type="text/javascript">
               // function addall(result, y) {
             var attend= Number(<?php echo $attendancemarks; ?>);
+          document.getElementById("attendancemarks").innerHTML = attend;
+          <?php $attend = "<script>document.write(attend)</script>"?>   
              // console.log(attend);
              // console.log(result);
              // console.log(y);
@@ -422,7 +428,7 @@
     if(isset($_POST['assign'])) {
       $student_id=$_POST['student_id'];
       $subject=$_POST['subject'];
-      $attendance=$_POST['attendance'];
+      //$attendancemarks=$_POST['attendancemarks'];
       $grade=(int)$_POST['grade'];
       
       $presentationexp=$_POST['presentationexp'];
@@ -432,7 +438,7 @@
     //  echo $gradeexp;
     for ($i=0; $i < count($student_id) ; $i++) {
       
-      $execute = mysqli_query($connect, "INSERT INTO term_work (student_id, subject_id,attendancemarks, assignment, presentation, exp_grade, overall) VALUES ('$student_id[$i]', '$subject', '$attendance', '$grade', '$presentationexp', '$gradeexp', '$overallexp') ON DUPLICATE KEY UPDATE attendancemarks='$attendance', assignment='$attendance',presentation='$attendance',exp_grade='$attendance',overall='$overallexp'");
+      $execute = mysqli_query($connect, "INSERT INTO term_work (student_id, subject_id,attendancemarks, assignment, presentation, exp_grade, overall) VALUES ('$student_id[$i]', '$subject', '$attend', '$grade', '$presentationexp', '$gradeexp', '$overallexp') ON DUPLICATE KEY UPDATE attendancemarks='$attend', assignment='$attend',presentation='$attend',exp_grade='$attend',overall='$overallexp'");
       
     }
       
