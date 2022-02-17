@@ -54,4 +54,11 @@ if (isset($_POST['create'])) {
 if (isset($_POST['create_attendance'])) {
 	CreateAttendance($connect, $_POST['student_id'], $_POST['subject'], $_POST['month'], $_POST['lectures_taken'], $_POST['days']);
 }
+
+
+if(isset($_POST['edit'])){
+echo $_POST['first_name'];
+ProfileDetails($connect,$_POST['first_name'],$_POST['middle_name'],$_POST['last_name'],$_POST['email'],$_POST['gender'],$_POST['id']);
+header("location: Templates/profile.php");
+}
 ?>
