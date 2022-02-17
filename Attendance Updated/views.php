@@ -1,7 +1,6 @@
 <?php
 require_once('config.php');
 
-
 function FacultyData($connect){
   $all_user = "SELECT * FROM user";  
   $all_user_result = mysqli_query($connect, $all_user);
@@ -29,8 +28,7 @@ function AddFaculty($connect, $faculty,$incharge, $academic_year, $scheme,$year,
 
 
 function SendFaculty($connect, $faculty_list) {
-  while($row = mysqli_fetch_array($faculty_list)){
-    $id = $row['id'];
+  foreach ($faculty_list as $id) {
     $send_faculty = "UPDATE position SET approval_status='2' WHERE id = '$id'"; 
   $send_faculty_result = mysqli_query($connect, $send_faculty);
   print_r($connect);
@@ -39,8 +37,7 @@ function SendFaculty($connect, $faculty_list) {
 
 
 function ApproveFaculty($connect, $faculty_list) {
-  while($row = mysqli_fetch_array($faculty_list)){
-    $id = $row['id'];
+  foreach ($faculty_list as $id) {
     $approve_faculty = "UPDATE position SET approval_status='1' WHERE id = '$id'"; 
     $approve_faculty_result = mysqli_query($connect, $approve_faculty);
     print_r($connect);
@@ -48,8 +45,7 @@ function ApproveFaculty($connect, $faculty_list) {
     }
 
 function RejectFaculty($connect, $faculty_list) {
-  while($row = mysqli_fetch_array($faculty_list)){
-    $id = $row['id'];
+  foreach ($faculty_list as $id) {
     $reject_faculty = "UPDATE position SET approval_status='0' WHERE id = '$id'"; 
   $reject_faculty_result = mysqli_query($connect, $reject_faculty);
   print_r($connect);

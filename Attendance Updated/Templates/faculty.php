@@ -463,6 +463,7 @@ list($all_user_result, $theory_subject_result, $practical_subject_result, $assig
       <th>Batch</th>
       <th>Approval Status</th>
     </tr>
+    <form method="POST" action="../urls.php">
     <?php
         while($row = mysqli_fetch_array($assigned_faculties_result)){
           ?>
@@ -492,6 +493,7 @@ list($all_user_result, $theory_subject_result, $practical_subject_result, $assig
             
             ?>
             <td><?php echo  $status; ?></td>
+            <input type="hidden" name="faculty_list[]" value="<?php echo  $row['id']; ?>">
 
 
 
@@ -503,7 +505,7 @@ list($all_user_result, $theory_subject_result, $practical_subject_result, $assig
     </div>
 
 
-<form method="POST" action="../urls.php">
+
     <div class="container">
           <div class="form-group" style="width: 100%; margin-top: 30px; float: left">
             <button
@@ -518,7 +520,7 @@ list($all_user_result, $theory_subject_result, $practical_subject_result, $assig
           </div>
         </div>
 
-        <input type="hidden" name="faculty_list" value="<?php print_r($assigned_faculties_result); ?>">
+        
 </form>
 
     <script>

@@ -11,26 +11,28 @@ if (isset($_POST['submit'])){
 
 if (isset($_POST['send'])){
 	SendFaculty($connect, $_POST['faculty_list']);
-	// header("location: Templates/faculty.php");
+	header("location: Templates/faculty.php");
 	
 }
 
 // faculty_approve.php
 if (isset($_POST['reject_faculty'])){
 	RejectFaculty($connect, $_POST['faculty_list']);
-	// header("location: Templates/faculty_approve.php");
+	header("location: Templates/faculty_approve.php");
 	
 }
 
 
 if (isset($_POST['approve_faculty'])){
 	ApproveFaculty($connect, $_POST['faculty_list']);
-	// header("location: Templates/faculty_approve.php");
+	header("location: Templates/faculty_approve.php");
 	
 }
 
 
 // roll_list_class_incharge.php
+
+$display_rolllist_result = [];
 if(isset($_POST['display'])){
 	list($display_rolllist_result, $year, $semester, $div) = DisplayStudentRollList($connect, $_POST['year'], $_POST['semester'], $_POST['division']);
 	// print_r($display_rolllist_result);

@@ -126,7 +126,7 @@ list($all_subject_result) = SubjectData($connect);
               <label for="subject"><b>Select Subject:</b></label>
               <select class="form-control" name="subject">
                 <?php
-                while ($row = mysqli_fetch_array($result)) {
+                while ($row = mysqli_fetch_array($all_subject_result)) {
                   echo '
                 <option value="' . ($row['subject_id']) . '">' . ($row['name']) . '</option>';
                 }
