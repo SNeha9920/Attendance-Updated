@@ -90,4 +90,11 @@ function CreateAttendance($connect, $student_id, $subject, $month, $lectures_tak
       $execute = mysqli_query($connect, "INSERT INTO attendance (student_id, subject_id, attendance) VALUES ('$student_id[$i]', $subject, '$dump') ON DUPLICATE KEY UPDATE attendance='$dump'");
     }
 }
+
+views.php
+function ProfileDetails($connect, $first_name, $middle_name, $last_name, $email, $gender, $id){
+  $profile_details = "UPDATE user SET first_name='$first_name', middle_name = '$middle_name',last_name = '$last_name',gender = '$gender', email = '$email'  WHERE teacher_id = '$id'";
+  $profile_details_result = mysqli_query($connect, $profile_details);
+}
+
 ?>
