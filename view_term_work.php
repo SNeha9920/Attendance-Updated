@@ -281,6 +281,7 @@
       </select> </td>
       <td id="marks">
        <script type="text/javascript">
+         let grandtotal;
               var x;
               let y;
               function yesnoCheck(that) {
@@ -300,6 +301,8 @@
                   x = document.getElementById("marks").innerHTML = `${y}`;
 
                 }
+                console.log(y);
+                grandtotal=grandtotal+ y;
 
                 return y;
               }
@@ -368,8 +371,8 @@
 
               }
               document.getElementById("journal").innerHTML = grade;
-            
-
+              console.log(result);
+              grandtotal=grandtotal+ result;
               return result;
               
             }
@@ -386,13 +389,14 @@
              // console.log(attend);
              // console.log(result);
              // console.log(y);
-             i=addit();
-             //j=yesnoCheck()
-             console.log(attend);
-             console.log(i);
-             console.log(y);
+            //  i=addit();
+            //  //j=yesnoCheck()
+            //  console.log(attend);
+            //  console.log(i);
+            //  console.log(y);
 
-            var grandtotal = result+attend+y;
+            // var grandtotal = result+attend+y;
+            grandtotal=grandtotal+ attend;
             console.log(grandtotal);
             //document.getElementById("term").innerHTML = grandtotal;
           //   return grandtotal;
